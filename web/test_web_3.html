@@ -1,0 +1,46 @@
+<!doctype html>
+<html>
+
+<head>
+  <title>bright theme</title>
+  <meta charset="utf-8">
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+  <script type="text/javascript">
+    var arrayWithElements = new Array();
+
+    function clickListener(e) {
+      var clickedElement = (window.event) ?
+        window.event.srcElement :
+        e.target,
+        tags = document.getElementsByTagName(clickedElement.tagName);
+
+      for (var i = 0; i < tags.length; ++i) {
+        if (tags[i] == clickedElement) {
+          arrayWithElements.push({
+            tag: clickedElement.tagName,
+            index: i
+          });
+          console.log(arrayWithElements);
+        }
+      }
+    }
+    document.onclick = clickListener;
+  </script>
+</head>
+
+<body>
+  <h1>UX studio</h1>
+  <h2>bright theme</h2>
+  <h3>sample page</h3>
+  <li>
+    <button type="button" name="button">type 1</button>
+  </li>
+  <li>
+    <button type="button" name="button">type 2</button>
+  </li>
+  <li>
+    <button type="button" name="button">type 3</button>
+  </li>
+</body>
+
+</html>

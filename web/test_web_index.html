@@ -1,0 +1,45 @@
+<!doctype html>
+<html>
+<head>
+  <title>UX studio</title>
+  <meta charset="utf-8">
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+  <script type="text/javascript">
+    var arrayWithElements = new Array();
+
+    function clickListener(e) {
+      var clickedElement = (window.event) ?
+        window.event.srcElement :
+        e.target,
+        tags = document.getElementsByTagName(clickedElement.tagName);
+
+      for (var i = 1; i < tags.length; ++i) {
+        if (tags[i] == clickedElement) {
+          arrayWithElements.push({
+            tag: clickedElement.tagName,
+            index: i
+          });
+          console.log(arrayWithElements);
+        }
+      }
+    }
+    document.onclick = clickListener;
+
+    //이 arrayWithElements배열을 server로 전송해야함
+    //이벤트가 발생할 때 마다 보내는 것이 아니라 유저가 페이지에서 나갈때 배열을 전송하면 1
+  </script>
+</head>
+<body>
+  <h1>UX studio</h1>
+  <h2>theme</h2>
+  <li>
+    <a href="test_web_1.html" target="_blank" title="html5 specification">simple theme</a>
+  </li>
+  <li>
+    <a href="test_web_2.html" target="_blank" title="html5 specification">dark theme</a>
+  </li>
+  <li>
+    <a href="test_web_3.html" target="_blank" title="html5 specification">bright theme</a>
+  </li>
+</body>
+</html>
