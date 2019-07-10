@@ -6,25 +6,28 @@
   <meta charset="utf-8">
   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
   <script type="text/javascript">
-    var arrayWithElements = new Array();
+  var arrayWithElements = new Array();
+  var exUrl = document.referrer;
 
-    function clickListener(e) {
-      var clickedElement = (window.event) ?
-        window.event.srcElement :
-        e.target,
-        tags = document.getElementsByTagName(clickedElement.tagName);
+  function clickListener(e) {
+    var clickedElement = (window.event) ?
+      window.event.srcElement :
+      e.target; //window.event가 있으면 window.event.srcElement가 선택되고 없으면 e.target선택
+    var tags = document.getElementsByTagName(clickedElement.tagName);//현재 클릭된 이벤트의 태그와 같은 모든 태그를 불러옴
 
-      for (var i = 0; i < tags.length; ++i) {
-        if (tags[i] == clickedElement) {
-          arrayWithElements.push({
-            tag: clickedElement.tagName,
-            index: i
-          });
-          console.log(arrayWithElements);
-        }
+    for (var i = 0; i < tags.length; ++i) {
+      if (tags[i] == clickedElement) {
+        arrayWithElements.push({
+          tag: clickedElement.tagName,
+          index: i,
+          value: tags[i].getAttribute("value")
+        });
+        console.log(arrayWithElements);
       }
     }
-    document.onclick = clickListener;
+  }
+  document.onclick = clickListener;
+
   </script>
 </head>
 
@@ -33,13 +36,13 @@
   <h2>bright theme</h2>
   <h3>sample page</h3>
   <li>
-    <button type="button" name="button">type 1</button>
+    <button type="button" name="button" value="type 1">type 1</button>
   </li>
   <li>
-    <button type="button" name="button">type 2</button>
+    <button type="button" name="button" value="type 2">type 2</button>
   </li>
   <li>
-    <button type="button" name="button">type 3</button>
+    <button type="button" name="button" value="type 3">type 3</button>
   </li>
 </body>
 
