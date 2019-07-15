@@ -6,8 +6,9 @@
   <meta charset="utf-8">
   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
   <script type="text/javascript">
-    var arrayWithElements = new Array();
-    var exUrl = document.referrer;
+    var click_info = new Array();
+    var user_info = document.referrer;
+    //var page_info =
 
     function clickListener(e) {
       var clickedElement = (window.event) ?
@@ -17,12 +18,12 @@
 
       for (var i = 0; i < tags.length; ++i) {
         if (tags[i] == clickedElement) {
-          arrayWithElements.push({
+          click_info.push({
             tag: clickedElement.tagName,
             index: i,
             value: tags[i].getAttribute("value")
           });
-          console.log(arrayWithElements);
+          console.log(click_info);
         }
       }
     }
