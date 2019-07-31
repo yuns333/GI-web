@@ -1,9 +1,19 @@
+/*
+body{
+  background-color:#353a3f
+}여기서도 html body에 대한 css 수정 가능*/ 
+
+/*
+*{
+  background-color:#353a3f
+}*은 전체에 대한 css 수정*/
+
 .App {
   background-color: white;
 }
 
 .App-header{
-
+  margin-bottom:2px;
 }
 
 .App-body{
