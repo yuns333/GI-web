@@ -1,0 +1,22 @@
+*{
+  background-color:#353a3f;
+}*
+
+.App{
+  background-color: white;
+}
+
+.App-header {
+  background-color: white;
+  margin-bottom:2px;
+}
+
+.App-body{
+  margin:0;
+  padding:0;
+  height:100%;
+}
+
+.App-footer{
+
+}

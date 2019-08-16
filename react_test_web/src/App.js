@@ -1,5 +1,4 @@
 import React from 'react';
-
 import NavigationBar from './NavigationBar'
 import Board from './Board'
 import Footer from './Footer'
@@ -20,7 +19,6 @@ class App extends React.Component {
       layouts: this.getInitialLayout(),
       patterns: this.getInitialPattern(),
       components: this.getInitialComponent(),
-      page_info: this.getPageInfo(),
       key: 0,
     };
   }
@@ -196,10 +194,6 @@ class App extends React.Component {
       }
     ]
   };
-  
-  getPageInfo(){
-
-  }
 
   render() {
     return(
