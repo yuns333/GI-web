@@ -2,13 +2,13 @@ import React from 'react';
 import './App.css';
 import NavigationBar from './NavigationBar';
 import Login from './Login'
-import Signup from './Signup';
+import Register from './Register';
 
 class App extends React.Component{
   constructor(props){
     super(props)
     this.state ={
-      userid:'',
+      userId:'',
       projectInfo:{},
       NavigationBarKey:0,
       loginState:0,
@@ -17,13 +17,13 @@ class App extends React.Component{
 
   onLogin(adminId){
 		this.setState({
-			userid: userid
+			userId: adminId
 		});
 	}
 
 	onLogout(){
 		this.setState({
-			userid:''
+			userId:''
 		});
   }
   
@@ -45,26 +45,48 @@ class App extends React.Component{
     const NavigationBarKey = this.state.NavigationBarKey;
     let body;
 
-    if (NavigationBarKey==1) {
+    if(!this.state.userId){
+      if (NavigationBarKey==1) {
    
-    } 
-    else if(NavigationBarKey==2) {
+      } 
+      else if(NavigationBarKey==2) {
+        body = <Login onLogin = {(s)=>this.state.onLogin(s)} />;
+      }
+      else if(NavigationBarKey==3) {
+      
+      }
+      else if(NavigationBarKey==4) {
+        body = <Login onLogin = {(s)=>this.state.onLogin(s)} />;
+      }
+      else if(NavigationBarKey==5) {
+        body = <Register />;
+      }
+    }
+    else{
+      if (NavigationBarKey==1) {
+   
+      } 
+      else if(NavigationBarKey==2) {
+  
+      }
+      else if(NavigationBarKey==3) {
+      
+      }
+      else if(NavigationBarKey==4) {
 
+      }
+      else if(NavigationBarKey==5) {
+
+      }
     }
-    else if(NavigationBarKey==3) {
     
-    }
-    else if(NavigationBarKey==4) {
-      body = <Login />;
-    }
-    else if(NavigationBarKey==5) {
-      body = <Signup />;
-    }
 
     return (
       <div className="App">
         <header className="App-header">
-          <NavigationBar onselect={(k)=>this.getNavigationBarKey(k)}/>
+          <NavigationBar 
+            onselect={(k)=>this.getNavigationBarKey(k)}
+            userId={this.state.userId}/>
         </header>
         <body className="App-body">
           {body}
