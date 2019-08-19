@@ -1,4 +1,6 @@
+//회원가입 화면
 import React from 'react';
+import axios from 'axios';
 import {Form} from 'react-bootstrap';
 import {Button} from 'react-bootstrap';
 
@@ -28,28 +30,28 @@ class Register extends React.Component{
 
     onSubmit(){
 		let userInfo={
-			'userid':this.state.requestId,
-            'password':this.state.requestPassword,
-            'email':this.state.requestEmail
-		};
-
-        fetch('/register',
-        {
-			method: 'POST',
-			headers:{
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify(userInfo)
-        })
-        .then((response)=> response.json())
-	    .then((responseData)=>{
-	    	if(responseData.loginresult){
-	    		console.log("success");
-            }
-            else{
-                console.log("fail");
-            }
-	    });
+			userid: this.state.requestId,
+            password: this.state.requestPassword,
+            email: this.state.requestEmail
+        };
+        
+        axios({
+            method: 'post',
+            url: '/register',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json;charset=UTF-8'
+            },
+            body: JSON.stringify(userInfo)
+          })
+          .then(function (response) {
+            window.confirm('회원가입 성공')
+            console.log("----------------response::", response);
+          })
+          .catch(function (error) {
+            window.confirm('회원가입 실패')
+            console.log("----------------error::", error);
+          });
 	}
 
     render(){
@@ -72,7 +74,7 @@ class Register extends React.Component{
                     <Form.Label>Email</Form.Label>
                     <Form.Control type="text" placeholder="Enter email" value={this.state.requestEmail} onChange={this.requestEmailChange}/>
                 </Form.Group>
-                <Button variant="primary" type="submit">
+                <Button variant="primary" type="submit" onClick={this.onSubmit.bind(this)}>
                     Submit
                 </Button>
             </Form>

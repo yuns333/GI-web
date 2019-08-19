@@ -1,5 +1,6 @@
+//로그인화면
 import React from 'react';
-import 'whatwg-fetch';
+import axios from 'axios';
 import {Form} from 'react-bootstrap';
 import {Button} from 'react-bootstrap';
 
@@ -21,33 +22,33 @@ class Login extends React.Component{
 		this.setState({requestPassword: event.target.value});
     }
     
-    onSubmit(){
-		let userInfo={
-			'userid':this.state.requestId,
-			'password':this.state.requestPassword
-		};
+    onSubmit(event){
+        event.preventDefault();
 
-        fetch('/login',
-        {
-			method: 'POST',
-			headers:{
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify(userInfo)
-        })
-        .then((response)=> response.json())
-	    .then((responseData)=>{
-	    	if(responseData.loginresult){
-	    		this.props.onLogin(this.state.requestId);
-	    	}
-	    	else{
-                console.log(responseData)
-				this.setState({
-					requestId:'',
-					requestPassword:''
-				});
-	    	}
-	    });
+        var that = this;
+		let userInfo={
+			userid: this.state.requestId,
+			password: this.state.requestPassword
+        };
+
+        axios({
+            method: 'post',
+            url: '/login',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json;charset=UTF-8'
+            },
+            body: JSON.stringify(userInfo)
+          })
+          .then(function (response) {
+            console.log("----------------response::", response);
+            window.confirm('로그인 성공')
+            that.props.onLogin(that.state.requestId);
+          })
+          .catch(function (error) {    
+            window.confirm('로그인 실패');
+            console.log("----------------error::", error);
+          });
 	}
 
     render(){
@@ -67,7 +68,7 @@ class Login extends React.Component{
                 <Form.Group controlId="formBasicChecbox">
                     <Form.Check type="checkbox" label="Check me out" />
                 </Form.Group>
-                <Button variant="primary" type="submit" onClick={this.onSubmit.bind(this)}>
+                <Button variant="primary" onClick={this.onSubmit.bind(this)}>
                     Submit
                 </Button>
             </Form>
