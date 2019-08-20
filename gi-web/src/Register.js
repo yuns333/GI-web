@@ -42,7 +42,7 @@ class Register extends React.Component{
         
         axios({
             method: 'post',
-            url: '/register',
+            url: '/api/register',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json;charset=UTF-8'

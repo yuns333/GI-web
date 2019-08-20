@@ -16,10 +16,6 @@ class ManageProject extends React.Component{
             selectedProjectName: ''
         };
     }
-    
-    componentDidMount() {
-        this.getProjectInfo();
-    }
 
     getProjectInfo(){
         var that = this;
@@ -28,7 +24,7 @@ class ManageProject extends React.Component{
         }
         axios({
             method: 'post',
-            url: '/project/show',
+            url: '/api/project/show',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json;charset=UTF-8'
@@ -59,6 +55,11 @@ class ManageProject extends React.Component{
         this.setState({
             manageProjectKey: k,
         })
+    }
+
+    componentDidMount() {
+        console.log("---------------componentdidmount::")
+        this.getProjectInfo();
     }
 
     render(){

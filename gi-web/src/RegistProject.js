@@ -48,7 +48,7 @@ class RegistProject extends React.Component{
         
         axios({
             method: 'post',
-            url: '/project/register',
+            url: '/api/project/register',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json;charset=UTF-8'

@@ -18,11 +18,6 @@ class ProjectDashBoard extends React.Component{
             period: 'd'
         };
     }
-
-    componentDidMount() {
-      this.getDashBoardInfo()
-    }
-
     setPeriod(k){
         this.setState({
             period: k,
@@ -32,10 +27,12 @@ class ProjectDashBoard extends React.Component{
     getDashBoardInfo(){
         var that = this;
 
+        console.log("-----------data::",that.props.userId, that.props.projectName, that.state.period)
+
         //Top pages
         axios({
             method: 'post',
-            url: '/top-pages',
+            url: '/api/top-pages',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json;charset=UTF-8'
@@ -58,7 +55,7 @@ class ProjectDashBoard extends React.Component{
           //browsers breakdown 
           axios({
             method: 'post',
-            url: '/browsers',
+            url: '/api/browsers',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json;charset=UTF-8'
@@ -82,7 +79,7 @@ class ProjectDashBoard extends React.Component{
           //devices breakdown
           axios({
             method: 'post',
-            url: '/devices',
+            url: '/api/devices',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json;charset=UTF-8'
@@ -105,7 +102,7 @@ class ProjectDashBoard extends React.Component{
           //os breakdown
           axios({
             method: 'post',
-            url: '/os',
+            url: '/api/os',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json;charset=UTF-8'
@@ -129,7 +126,7 @@ class ProjectDashBoard extends React.Component{
           //active users
           axios({
             method: 'post',
-            url: '/active-users',
+            url: '/api/active-users',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json;charset=UTF-8'
@@ -153,7 +150,7 @@ class ProjectDashBoard extends React.Component{
           //total users
           axios({
             method: 'post',
-            url: '/total-users',
+            url: '/api/total-users',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json;charset=UTF-8'
@@ -177,7 +174,7 @@ class ProjectDashBoard extends React.Component{
           //referrers
           axios({
             method: 'post',
-            url: '/referrers',
+            url: '/api/referrers',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json;charset=UTF-8'
@@ -201,7 +198,7 @@ class ProjectDashBoard extends React.Component{
           //funnel api
           axios({
             method: 'post',
-            url: '/funnel',
+            url: '/api/funnel',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json;charset=UTF-8'
@@ -230,8 +227,13 @@ class ProjectDashBoard extends React.Component{
           });
     }
 
+    componentDidMount() {
+      console.log("---------------componentdidmount::")
+      this.getDashBoardInfo()
+    }
+
+
     render(){
-        this.getDashBoardInfo()
         return(
             <div>
                 <ButtonGroup aria-label="Basic example">

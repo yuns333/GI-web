@@ -32,7 +32,7 @@ class Login extends React.Component{
         console.log("---------------userInfo::", userInfo);
         axios({
             method: 'post',
-            url: '/login',
+            url: '/api/login',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json;charset=UTF-8'
