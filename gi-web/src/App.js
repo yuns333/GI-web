@@ -31,7 +31,8 @@ class App extends React.Component{
 		this.setState({
       userId:'',
       NavigationBarKey:0,
-		});
+    });
+    window.alert('로그아웃 되었습니다.')
   }
   
   getProjectInfo(info){
@@ -40,11 +41,11 @@ class App extends React.Component{
 		});
   }
 
-  getNavigationBarKey(k){
+  setNavigationBarKey(k){
     this.setState({
       NavigationBarKey: k
     });
-    console.log(this.state.NavigationBarKey)//한박자씩 늦게 변화하는 이유?
+    console.log(this.state.NavigationBarKey)
   }
 
   render(){
@@ -69,7 +70,7 @@ class App extends React.Component{
         body = <Login onLogin = {(s)=>this.onLogin(s)} />;
       }
       else if(NavigationBarKey==5) {
-        body = <Register />;
+        body = <Register setNavigationBarKey = {(k)=>this.setNavigationBarKey(k)}/>;
       }
     }
     else{
@@ -96,7 +97,7 @@ class App extends React.Component{
       <div className="App">
         <header className="App-header">
           <NavigationBar 
-            onselect={(k)=>this.getNavigationBarKey(k)}
+            onselect={(k)=>this.setNavigationBarKey(k)}
             userId={this.state.userId}/>
         </header>
         <body className="App-body">

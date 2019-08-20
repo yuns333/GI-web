@@ -22,15 +22,14 @@ class Login extends React.Component{
 		this.setState({requestPassword: event.target.value});
     }
     
-    onSubmit(event){
-        event.preventDefault();
-
+    onSubmit(){
         var that = this;
 		let userInfo={
 			userid: this.state.requestId,
 			password: this.state.requestPassword
         };
 
+        console.log("---------------userInfo::", userInfo);
         axios({
             method: 'post',
             url: '/login',
@@ -38,16 +37,21 @@ class Login extends React.Component{
                 'Accept': 'application/json',
                 'Content-Type': 'application/json;charset=UTF-8'
             },
-            body: JSON.stringify(userInfo)
+            data: userInfo
           })
           .then(function (response) {
             console.log("----------------response::", response);
-            window.confirm('로그인 성공')
-            that.props.onLogin(that.state.requestId);
+            if(response.data.code == 200){
+                window.alert(response.data.message)
+                that.props.onLogin(that.state.requestId);
+            }
+            else{
+                window.alert(response.data.message)
+            }
           })
           .catch(function (error) {    
-            window.confirm('로그인 실패');
             console.log("----------------error::", error);
+            window.alert('로그인 실패');
           });
 	}
 

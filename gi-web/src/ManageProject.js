@@ -10,71 +10,80 @@ class ManageProject extends React.Component{
     constructor(props){
         super(props);
         this.state = {
-            ManageProjectKey: 0,
+            manageProjectKey: 0,
             projectInfo: null,
+            projectInfoMapping: null ,
             selectedProjectName: ''
         };
-        this.getProjectInfo = this.getProjectInfo.bind()
     }
     
     getProjectInfo(){
         var that = this;
+        let userId = {
+            userid:this.props.userId
+        }
         axios({
-            method: 'get',
+            method: 'post',
             url: '/project/show',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json;charset=UTF-8'
             },
+            data: userId
           })
           .then(function (response) {
-            that.setState ({projectInfo : response.body})
             console.log("----------------response::",response);
+              if(response.data.code == 200){
+                var temp = response.data.data;
+                var projectInfo = temp.map((x,i)=>
+                    {return (<ListGroup.Item action onClick={()=>that.setState({manageProjectKey:2,selectedProjectName:x.projectname })}>{x.projectname}</ListGroup.Item>)}
+                )
+                console.log("----------------response::",projectInfo);
+                that.setState({projectInfo: response.data.data, projectInfoMapping : projectInfo})
+              }
+              else{
+                window.alert(response.data.message)
+              }
           })
           .catch(function (error) {
-            window.confirm('프로젝트 불러오기 실패')
             console.log("----------------error::",error);
+            window.alert('프로젝트 불러오기 실패')
           });
     }
 
-    goToRegistProject(){
+    setManageProjectKey(k){
         this.setState({
-            ManageProjectKey: 1,
-        })
-    }
-
-    goToProjectDashBoard(name){
-        this.setState({
-            ManageProjectKey: 2,
-            selectedProjectName: name
+            manageProjectKey: k,
         })
     }
 
     render(){
+
+        this.getProjectInfo();
+
         let body;
-        let projectInfo;
+        let projectInfo = this.state.projectInfoMapping;
 
-        for(var i in this.state.projectInfo){
-            var name = this.state.projectInfo[i].name;
-            projectInfo += <ListGroup.Item action onClick={()=>this.goToProjectDashBoard(name)}>{name}</ListGroup.Item>
-        }
+        console.log("-----------------this.state.projectInfo::",this.state.projectInfo);
+        console.log("-----------------projectInfo::",projectInfo);
+        console.log("-----------------managiProjectKey::",this.state.manageProjectKey);
 
-        if(this.state.ManageProjectKey == 0){
+        if(this.state.manageProjectKey == 0){
             body =  
             <div>
                 <ListGroup>
                     {projectInfo}
                 </ListGroup>
-                <Button variant="primary" type="submit" onClick={()=>this.goToRegistProject()}>
+                <Button variant="primary" onClick={()=>this.setState({manageProjectKey:1})}>
                     프로젝트 등록
                 </Button>
             </div>
         }
-        else if(this.state.ManageProjectKey == 1){
-            body = <RegistProject userId={this.props.userId}/>
+        else if(this.state.manageProjectKey == 1){
+            body = <RegistProject userId={this.props.userId} setManageProjectKey={(k)=>this.setManageProjectKey(k)} />
         }
-        else if(this.state.ManageProjectKey == 2){
-            body = <ProjectDashBoard projectName = {this.state.selectedProjectName}/>
+        else if(this.state.manageProjectKey == 2){
+            body = <ProjectDashBoard userId={this.props.userId} projectName = {this.state.selectedProjectName}/>
         }
         return(
            <div>

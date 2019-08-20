@@ -35,6 +35,7 @@ class RegistProject extends React.Component{
     }
 
     onSubmit(){
+        var that = this;
 		let projectInfo={
 			userid: this.state.requestUserId,
             projectname: this.state.requestProjectName,
@@ -52,15 +53,21 @@ class RegistProject extends React.Component{
                 'Accept': 'application/json',
                 'Content-Type': 'application/json;charset=UTF-8'
             },
-            body: JSON.stringify(projectInfo)
+            data: projectInfo
           })
           .then(function (response) {
-            window.confirm('프로젝트 등록 성공')
             console.log("----------------response::",response);
+            if(response.data.code == 200){
+              window.alert(response.data.message)
+              that.props.setManageProjectKey(0); 
+            }
+            else{
+              window.alert(response.data.message)
+            }
           })
           .catch(function (error) {
-            window.confirm('프로젝트 등록 실패')
             console.log("----------------error::",error);
+            window.alert('프로젝트 등록 실패')
           });
 	}
 

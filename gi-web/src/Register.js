@@ -29,11 +29,16 @@ class Register extends React.Component{
     }
 
     onSubmit(){
+
+        var that = this;
+
 		let userInfo={
 			userid: this.state.requestId,
             password: this.state.requestPassword,
             email: this.state.requestEmail
         };
+        
+        console.log("---------------userInfo::", userInfo);
         
         axios({
             method: 'post',
@@ -42,15 +47,21 @@ class Register extends React.Component{
                 'Accept': 'application/json',
                 'Content-Type': 'application/json;charset=UTF-8'
             },
-            body: JSON.stringify(userInfo)
+            data: userInfo
           })
           .then(function (response) {
-            window.confirm('회원가입 성공')
             console.log("----------------response::", response);
+            if(response.data.code == 200){
+                window.alert(response.data.message)
+                that.props.setNavigationBarKey(0);
+            }
+            else{
+                window.alert(response.data.message)
+            }
           })
           .catch(function (error) {
-            window.confirm('회원가입 실패')
             console.log("----------------error::", error);
+            window.alert('회원가입 실패')
           });
 	}
 
@@ -74,7 +85,7 @@ class Register extends React.Component{
                     <Form.Label>Email</Form.Label>
                     <Form.Control type="text" placeholder="Enter email" value={this.state.requestEmail} onChange={this.requestEmailChange}/>
                 </Form.Group>
-                <Button variant="primary" type="submit" onClick={this.onSubmit.bind(this)}>
+                <Button variant="primary" onClick={this.onSubmit.bind(this)}>
                     Submit
                 </Button>
             </Form>
