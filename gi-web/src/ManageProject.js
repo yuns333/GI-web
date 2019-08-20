@@ -17,6 +17,10 @@ class ManageProject extends React.Component{
         };
     }
     
+    componentDidMount() {
+        this.getProjectInfo();
+    }
+
     getProjectInfo(){
         var that = this;
         let userId = {
@@ -58,8 +62,6 @@ class ManageProject extends React.Component{
     }
 
     render(){
-
-        this.getProjectInfo();
 
         let body;
         let projectInfo = this.state.projectInfoMapping;

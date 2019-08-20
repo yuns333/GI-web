@@ -19,6 +19,10 @@ class ProjectDashBoard extends React.Component{
         };
     }
 
+    componentDidMount() {
+      this.getDashBoardInfo()
+    }
+
     setPeriod(k){
         this.setState({
             period: k,
