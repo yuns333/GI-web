@@ -15,7 +15,7 @@ class ProjectDashBoard extends React.Component{
             totalUsers:'',
             referrers:'',
             funnel:'',
-            period: 'd'
+            period: 'w'
         };
     }
     setPeriod(k){
@@ -241,7 +241,6 @@ class ProjectDashBoard extends React.Component{
                   <Button variant="secondary" onClick={(k)=>this.setPeriod("w")}>week</Button>
                   <Button variant="secondary" onClick={(k)=>this.setPeriod("M")}>month</Button>
                 </ButtonGroup>
-                {this.state.dashBoardInfo}
             </div>
         )
     }

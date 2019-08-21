@@ -3,6 +3,7 @@ import React from 'react';
 import axios from 'axios';
 import {Form} from 'react-bootstrap';
 import {Button} from 'react-bootstrap';
+import './Login.css'
 
 class Login extends React.Component{
     constructor(props){
@@ -57,7 +58,8 @@ class Login extends React.Component{
 
     render(){
         return(
-            <Form>
+            <center>
+            <Form className="login">
                 <Form.Group controlId="formBasicId">
                     <Form.Label>User ID</Form.Label>
                     <Form.Control type="text" name ="requestId" placeholder="Enter email" value={this.state.requestId} onChange={this.requestIdChange}/>
@@ -72,10 +74,11 @@ class Login extends React.Component{
                 <Form.Group controlId="formBasicChecbox">
                     <Form.Check type="checkbox" label="Check me out" />
                 </Form.Group>
-                <Button variant="primary" onClick={this.onSubmit.bind(this)}>
-                    Submit
-                </Button>
             </Form>
+            <Button className="button" variant="primary" onClick={this.onSubmit.bind(this)}>
+                    Submit
+            </Button>
+            </center>
         )
     }
 }

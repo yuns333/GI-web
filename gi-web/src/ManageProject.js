@@ -5,6 +5,7 @@ import {ListGroup} from 'react-bootstrap';
 import {Button} from 'react-bootstrap';
 import RegistProject from './RegistProject';
 import ProjectDashBoard from './ProjectDashBoard'
+import './ManageProject.css';
 
 class ManageProject extends React.Component{
     constructor(props){
@@ -74,12 +75,14 @@ class ManageProject extends React.Component{
         if(this.state.manageProjectKey == 0){
             body =  
             <div>
-                <ListGroup>
+                <center>
+                <ListGroup className="project-list">
                     {projectInfo}
                 </ListGroup>
-                <Button variant="primary" onClick={()=>this.setState({manageProjectKey:1})}>
+                <Button className="button" variant="primary" onClick={()=>this.setState({manageProjectKey:1})}>
                     프로젝트 등록
                 </Button>
+                </center>
             </div>
         }
         else if(this.state.manageProjectKey == 1){

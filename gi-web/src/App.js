@@ -21,10 +21,17 @@ class App extends React.Component{
 
   onLogin(adminId){
     console.log("--------------::", adminId);
-		this.setState({
-      userId: adminId,
-      NavigationBarKey:0,
-    });
+    if(this.state.NavigationBarKey==4){
+      this.setState({
+        userId: adminId,
+        NavigationBarKey:0,
+      });
+    }
+    else{
+      this.setState({
+        userId: adminId,
+      });
+    }
 	}
 
 	onLogout(){
