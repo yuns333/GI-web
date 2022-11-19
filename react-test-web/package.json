@@ -10,7 +10,7 @@
     "react-dom": "^16.8.6",
     "react-iframe": "^1.8.0",
     "react-native-super-grid": "^3.0.8",
-    "react-scripts": "3.0.1",
+    "react-scripts": "5.0.1",
     "semantic-ui-react": "^0.87.3"
   },
   "scripts": {
